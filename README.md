@@ -133,3 +133,5 @@ MINOR, and PATCH versions on each release to indicate any incompatibilities.
 This code is released under the Apache 2.0 License. Please see [LICENSE](https://github.com/hashicorp/terraform-google-nomad/tree/master/LICENSE) and [NOTICE](https://github.com/hashicorp/terraform-aws-nomad/tree/master/NOTICE) for more details.
 
 Copyright &copy; 2017 [Gruntwork](https://gruntwork.io/?ref=gcp_nomad_repo), Inc.
+
+## This being maintained for personal use by Liam Monninger
