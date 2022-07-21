@@ -19,7 +19,7 @@ output "instance_group_name" {
 }
 
 output "instance_template_url" {
-  value = data.template_file.compute_instance_template_self_link.rendered
+  value = data.templatefile.compute_instance_template_self_link.rendered
 }
 
 output "firewall_rule_allow_inbound_http_url" {
