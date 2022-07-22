@@ -40,7 +40,13 @@ module "nomad_and_consul_servers" {
   machine_type     = var.nomad_consul_server_cluster_machine_type
 
   source_image   = var.nomad_consul_server_source_image
-  startup_script = data.templatefile.startup_script_nomad_consul_server.rendered
+  startup_script = templatefile(
+    "${path.module}/examples/root-example/startup-script-nomad-consul-server.sh",
+    {
+      num_servers                    = var.nomad_consul_server_cluster_size
+      consul_server_cluster_tag_name = var.nomad_consul_server_cluster_name
+    }
+  )
 
   # WARNING!
   # In a production setting, we strongly recommend only launching a Nomad/Consul Server cluster as private nodes.
@@ -70,16 +76,7 @@ module "nomad_firewall_rules" {
 }
 
 # Render the Startup Script that will run on each Nomad Instance on boot. This script will configure and start Nomad.
-data "templatefile" "startup_script_nomad_consul_server" {
-  template = file(
-    "${path.module}/examples/root-example/startup-script-nomad-consul-server.sh",
-  )
 
-  vars = {
-    num_servers                    = var.nomad_consul_server_cluster_size
-    consul_server_cluster_tag_name = var.nomad_consul_server_cluster_name
-  }
-}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE NOMAD CLIENT NODES
@@ -99,7 +96,12 @@ module "nomad_clients" {
   machine_type     = var.nomad_client_machine_type
 
   source_image   = var.nomad_client_source_image
-  startup_script = data.templatefile.startup_script_nomad_client.rendered
+  startup_script = templatefile(
+    "${path.module}/examples/root-example/startup-script-nomad-client.sh",
+    {
+      consul_server_cluster_tag_name = var.nomad_consul_server_cluster_name
+    }
+  )
 
   # We strongly recommend setting this to "false" in a production setting. Your Nomad cluster has no reason to be
   # publicly accessible! However, for testing and demo purposes, it is more convenient to launch a publicly accessible
@@ -111,15 +113,4 @@ module "nomad_clients" {
   allowed_inbound_tags_http        = [var.nomad_consul_server_cluster_name]
   allowed_inbound_tags_rpc         = [var.nomad_consul_server_cluster_name]
   allowed_inbound_tags_serf        = [var.nomad_consul_server_cluster_name]
-}
-
-# Render the Startup Script that will configure and run both Consul and Nomad in client mode.
-data "templatefile" "startup_script_nomad_client" {
-  template = file(
-    "${path.module}/examples/root-example/startup-script-nomad-client.sh",
-  )
-
-  vars = {
-    consul_server_cluster_tag_name = var.nomad_consul_server_cluster_name
-  }
 }

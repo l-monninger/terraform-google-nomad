@@ -18,10 +18,6 @@ output "instance_group_name" {
   value = google_compute_region_instance_group_manager.nomad.name
 }
 
-output "instance_template_url" {
-  value = data.templatefile.compute_instance_template_self_link.rendered
-}
-
 output "firewall_rule_allow_inbound_http_url" {
   value = module.firewall_rules.firewall_rule_allow_inbound_http_url
 }
