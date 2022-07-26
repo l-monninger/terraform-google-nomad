@@ -171,6 +171,8 @@ module "firewall_rules" {
   allowed_inbound_tags_rpc = var.allowed_inbound_tags_rpc
   allowed_inbound_tags_serf = var.allowed_inbound_tags_serf
 
+  network_name = var.network_name
+
   http_port = 4646
   rpc_port  = 4647
   serf_port = 4648
