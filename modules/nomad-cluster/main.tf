@@ -177,9 +177,3 @@ module "firewall_rules" {
   rpc_port  = 4647
   serf_port = 4648
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# CONVENIENCE VARIABLES
-# Because we've got some conditional logic in this template, some values will depend on our properties. This section
-# wraps such values in a nicer construct.
-# ---------------------------------------------------------------------------------------------------------------------
