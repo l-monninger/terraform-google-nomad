@@ -61,8 +61,8 @@ variable "assign_public_ip_addresses" {
   default     = false
 }
 
-variable "network_name" {
-  description = "The name of the VPC Network where all resources should be created."
+variable "subnetwork_name" {
+  description = "The name of the VPC Subnetwork where all resources should be created."
   type        = string
   default     = "default"
 }
