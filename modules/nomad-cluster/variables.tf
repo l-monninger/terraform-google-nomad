@@ -64,11 +64,13 @@ variable "assign_public_ip_addresses" {
 variable "network_name" {
   description = "The name of the VPC Network where all resources should be created."
   type        = string
+  default     = null
 }
 
 variable "subnetwork_name" {
   description = "The name of the VPC Subnetwork where all resources should be created."
   type        = string
+  default     = null
 }
 
 variable "custom_tags" {
