@@ -11,7 +11,7 @@ output "instance_group_id" {
 }
 
 output "instance_group_url" {
-  value = google_compute_region_instance_group_manager.nomad.self_link
+  value = google_compute_region_instance_group_manager.nomad.instance_group
 }
 
 output "instance_group_name" {
